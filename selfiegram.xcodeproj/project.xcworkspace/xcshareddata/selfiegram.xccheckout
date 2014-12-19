@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>A67C9D8A-3AC6-40DC-8E04-3DCCECB7F471</string>
+	<key>IDESourceControlProjectName</key>
+	<string>selfiegram</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>AB6BC405FC2494098909F15344231DC3553D5E51</key>
+		<string>https://github.com/blacklotusi/ios-practice.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>obj-c/selfiegram/selfiegram.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>AB6BC405FC2494098909F15344231DC3553D5E51</key>
+		<string>../../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/blacklotusi/ios-practice.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>AB6BC405FC2494098909F15344231DC3553D5E51</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>AB6BC405FC2494098909F15344231DC3553D5E51</string>
+			<key>IDESourceControlWCCName</key>
+			<string>ios%20practice</string>
+		</dict>
+	</array>
+</dict>
+</plist>
