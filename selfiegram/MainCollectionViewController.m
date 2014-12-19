@@ -11,9 +11,12 @@
 #import "AFNetworking.h"
 #import "AFURLSessionManager.h"
 
+#define REQUEST_URL @"http://www.reddit.com/r/selfies.json?limit=5"
+
 @interface MainCollectionViewController ()
 
-@property (nonatomic,strong) NSMutableArray *responseArray;
+
+@property (nonatomic,strong) NSMutableArray *responseArray; //eventually want to use dictionary
 @property (nonatomic,strong) NSOperationQueue *backgroundQueue;
 
 @end
@@ -27,18 +30,7 @@ static NSString * const reuseIdentifier = @"Cell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // Uncomment the following line to preserve selection between presentations
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    
-    // initial request
-    NSString *urlString = [[NSString alloc] init];
-    
-    
-    urlString = @"http://www.reddit.com/r/selfies.json?limit=100";
-    
-    
-    NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:urlString]]];
+    NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:REQUEST_URL]]];
     [request setHTTPMethod:@"GET"];
     
     AFHTTPRequestOperation *afoperation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
@@ -47,11 +39,12 @@ static NSString * const reuseIdentifier = @"Cell";
     //Setup blocks that will be called after request finishes
     [afoperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         
-        _responseArray = [responseObject valueForKeyPath:@"data"];
+        _responseArray  = [responseObject valueForKeyPath:@"data.children.data.thumbnail"];
+    
+        NSLog(@" response %@", _responseArray);
         
-        NSLog(@" response %@", responseObject);
-        
-        
+        [self.collectionView reloadData];
+
     }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@",error);
     }];
@@ -63,10 +56,7 @@ static NSString * const reuseIdentifier = @"Cell";
     
     // Register cell classes
     [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
-    
-    NSLog(@"%@", _responseArray);
-    
-    
+
     // Do any additional setup after loading the view.
 }
 
@@ -74,6 +64,9 @@ static NSString * const reuseIdentifier = @"Cell";
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+
+
 
 /*
 #pragma mark - Navigation
@@ -89,21 +82,25 @@ static NSString * const reuseIdentifier = @"Cell";
 
 // columns
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-#warning Incomplete method implementation -- Return the number of sections
-    return 0;
+    return 1;
 }
 
 // rows
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-#warning Incomplete method implementation -- Return the number of items in the section
-    //return _responseArray.count;
-    return 0;
+    return _responseArray.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
     
-    // Configure the cell
+    static NSString *identifier = @"imageCell";
+    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
+    
+    NSString *imageUrl = [_responseArray objectAtIndex:indexPath.row];
+    UIImageView *selfieImage = (UIImageView *)[self.collectionView viewWithTag:10];
+
+    selfieImage.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:imageUrl]]];
+    
+    NSLog(@"%ld", (long)indexPath.row);
     
     return cell;
 }
