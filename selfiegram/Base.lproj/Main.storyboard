@@ -4,10 +4,10 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
     <scenes>
-        <!--Collection View Controller-->
+        <!--Main Collection View Controller-->
         <scene sceneID="jgZ-ch-BSa">
             <objects>
-                <collectionViewController id="Ru9-aj-bxU" sceneMemberID="viewController">
+                <collectionViewController id="Ru9-aj-bxU" customClass="MainCollectionViewController" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="H9C-hB-b20">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

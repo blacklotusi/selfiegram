@@ -7,8 +7,14 @@
 //
 
 #import "MainCollectionViewController.h"
+#import <AFNetworking/UIImageView+AFNetworking.h>
+#import "AFNetworking.h"
+#import "AFURLSessionManager.h"
 
 @interface MainCollectionViewController ()
+
+@property (nonatomic,strong) NSMutableArray *responseArray;
+@property (nonatomic,strong) NSOperationQueue *backgroundQueue;
 
 @end
 
@@ -26,9 +32,8 @@ static NSString * const reuseIdentifier = @"Cell";
     
     
     // initial request
-    //NSMutableArray *postArray = [[NSMutableArray alloc] init];
-    
     NSString *urlString = [[NSString alloc] init];
+    
     
     urlString = @"http://www.reddit.com/r/selfies.json?limit=100";
     
@@ -36,10 +41,30 @@ static NSString * const reuseIdentifier = @"Cell";
     NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:urlString]]];
     [request setHTTPMethod:@"GET"];
     
+    AFHTTPRequestOperation *afoperation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    afoperation.responseSerializer = [AFJSONResponseSerializer serializer];
+    
+    //Setup blocks that will be called after request finishes
+    [afoperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        _responseArray = [responseObject valueForKeyPath:@"data"];
+        
+        NSLog(@" response %@", responseObject);
+        
+        
+    }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error: %@",error);
+    }];
+    
+    //Create on background queue so is async
+    self.backgroundQueue = [[NSOperationQueue alloc] init];
+    [self.backgroundQueue addOperation:afoperation];
+    
     
     // Register cell classes
     [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
     
+    NSLog(@"%@", _responseArray);
     
     
     // Do any additional setup after loading the view.
@@ -62,14 +87,16 @@ static NSString * const reuseIdentifier = @"Cell";
 
 #pragma mark <UICollectionViewDataSource>
 
+// columns
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
 #warning Incomplete method implementation -- Return the number of sections
     return 0;
 }
 
-
+// rows
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
 #warning Incomplete method implementation -- Return the number of items in the section
+    //return _responseArray.count;
     return 0;
 }
 
