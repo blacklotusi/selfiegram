@@ -10,6 +10,7 @@
 #import <AFNetworking/UIImageView+AFNetworking.h>
 #import "AFNetworking.h"
 #import "AFURLSessionManager.h"
+#import "SelfieViewController.h"
 
 #define REQUEST_URL @"http://www.reddit.com/r/selfies.json?limit=5"
 
@@ -95,15 +96,32 @@ static NSString * const reuseIdentifier = @"Cell";
     static NSString *identifier = @"imageCell";
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
     
-    NSString *imageUrl = [_responseArray objectAtIndex:indexPath.row];
+    NSString *imageUrl = [_responseArray objectAtIndex:indexPath.item];
     UIImageView *selfieImage = (UIImageView *)[self.collectionView viewWithTag:10];
 
     selfieImage.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:imageUrl]]];
     
-    NSLog(@"%ld", (long)indexPath.row);
+    NSLog(@"%ld", (long)indexPath.item);
+
     
     return cell;
 }
+
+
+
+#pragma mark Button event
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"viewSelfie"]) {
+
+        SelfieViewController *destViewController = (SelfieViewController*)segue.destinationViewController;
+
+        //TODO pass image to selfie vc
+        
+    }
+}
+
+
 
 #pragma mark <UICollectionViewDelegate>
 

@@ -28,6 +28,15 @@
                                         <imageView userInteractionEnabled="NO" tag="10" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OBg-ir-YQL">
                                             <rect key="frame" x="5" y="4" width="208" height="168"/>
                                         </imageView>
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yWc-TV-uwC">
+                                            <rect key="frame" x="0.0" y="0.0" width="218" height="176"/>
+                                            <state key="normal">
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <connections>
+                                                <segue destination="qbo-jl-eMN" kind="push" identifier="viewSelfie" id="ZIc-J4-7Mv"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
@@ -44,6 +53,33 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ra8-jg-SiQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="306" y="630"/>
+        </scene>
+        <!--Selfie View Controller-->
+        <scene sceneID="ve8-eJ-nzh">
+            <objects>
+                <viewController id="qbo-jl-eMN" customClass="SelfieViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Owl-mB-eOn"/>
+                        <viewControllerLayoutGuide type="bottom" id="SoX-pE-BE9"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="x9L-wd-hj4">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="J0d-pu-Qrs">
+                                <rect key="frame" x="0.0" y="61" width="320" height="332"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="kln-Sg-s3K"/>
+                    <connections>
+                        <outlet property="imageView" destination="J0d-pu-Qrs" id="aBL-9c-C2A"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="X6C-Ww-SFU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="744" y="630"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="eeB-v9-TU5">
