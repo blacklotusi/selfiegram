@@ -16,11 +16,26 @@
 
 static NSString * const reuseIdentifier = @"Cell";
 
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     // Uncomment the following line to preserve selection between presentations
     // self.clearsSelectionOnViewWillAppear = NO;
+    
+    
+    // initial request
+    //NSMutableArray *postArray = [[NSMutableArray alloc] init];
+    
+    NSString *urlString = [[NSString alloc] init];
+    
+    urlString = @"http://www.reddit.com/r/selfies.json?limit=100";
+    
+    
+    NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:urlString]]];
+    [request setHTTPMethod:@"GET"];
+    
     
     // Register cell classes
     [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
